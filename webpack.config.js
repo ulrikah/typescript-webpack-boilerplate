@@ -5,10 +5,22 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        app: './src/index'
+        app : './src/index.ts'
+    },
+    module : {
+        rules : [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            }
+        ]
+    },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ],
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[app].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
     devtool: 'inline-source-map',
@@ -20,5 +32,5 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Output Management',
         }),
-  ]
+    ]
 };
